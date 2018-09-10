@@ -1,0 +1,74 @@
+div( class='modal fade' id='modal-edit' tabindex='-1' role='dialog' aria-labelledby='modalLabel' aria-hidden='true' )
+    div( class='modal-dialog modal-md' role='document' )
+        div( class='modal-content' )
+            div( class='modal-header' )
+                h5( class='modal-title' ) EDITAR USUARIO
+                button( type='button' class='close' data-dismiss='modal' )
+                    i( class='material-icons' aria-hidden='true' ) close
+            div( class='modal-body mt-4' )
+                form( method='POST' action='posts/edituser' id='edit' )
+                    div( class='row' )
+                        div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) USUARIO
+                                input( type='text' class='form-control' autocomplete='off' name='nickname' id='nickname' )
+                                span( class='material-input' )
+                    div( class='row' )
+                        div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) CONTRASENA
+                                input( type='text' class='form-control' autocomplete='off' name='pass' id='pass' )
+                                span( class='material-input' )
+                    div( class='row' )
+                        div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) TIPO
+                                input( type='text' class='form-control' autocomplete='off' name='type' id='type' )
+                                span( class='material-input' )
+            div( class='modal-footer justify-content-center' )
+                button( type='button' class='btn btn-def' data-dismiss='modal'  role='button' ) CANCELAR
+                button( type='submit' form='edit' class='btn' role='button' ) MODIFICAR
+                
+                
+                
+                
+div( class='modal fade' id='modal-contact' tabindex='-1' role='dialog' aria-labelledby='modalLabel' aria-hidden='true' )
+    div( class='modal-dialog modal-md' role='document' )
+        div( class='modal-content' )
+            div( class='modal-header' )
+                h5( class='modal-title' ) CONTACTO
+                button( type='button' class='close' data-dismiss='modal' )
+                    i( class='material-icons' aria-hidden='true' ) close
+            div( class='modal-body' )
+                //form( id='contact' )
+                form( method='POST' action='/contact' id='contact' )
+                    div( class='row justify-content-md-center' )
+                        div( class='col-12' )
+                            p Para nosotros es importante tu opinión, a continuación puedes escribirnos tus dudas y/o sugerencias, gracias.
+                    div( class='row' )
+                        div( class='col-lg-6 col-md-6 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) NOMBRE
+                                input( type='text' class='form-control' autocomplete='off' name='name' id='name' )
+                                span( class='material-input' )
+                        div( class='col-lg-6 col-md-6 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) EMAIL
+                                input( type='email' class='form-control' autocomplete='off' name='email' id='email' )
+                                span( class='material-input' )
+                    div( class='row' )
+                        div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) ASUNTO
+                                input( type='text' class='form-control' autocomplete='off' name='subject' id='subject' )
+                                span( class='material-input' )
+                    div( class='row' )
+                        div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) MENSAJE
+                                textarea( class='form-control' rows='8' autocomplete='off' name='message' id='message' )
+                                span( class='material-input' )
+            div( class='modal-footer justify-content-center' )
+                //button( type='button' class='btn btn-def' data-dismiss='modal'  role='button' ) CANCELAR
+                //button( type='submit' form='msj' class='btn' role='button' ) ENVIAR MENSAJE
+                button( type='submit' form='contact' class='btn' role='button' ) ENVIAR

@@ -1,0 +1,121 @@
+extends layout
+
+block content
+
+        section( id='inicio' class='section-grey h-100' )
+            div( class='container content-section h-100' )
+                div( class='row h-100 justify-content-center align-items-center' )
+                    div( class='col-lg-10 offset-lg-1' data-aos='zoom-in' )
+                        div( class='embed-responsive embed-responsive-16by9' )
+                            iframe( class='embed-responsive-item' src='https://www.youtube.com/embed/8oqmzos8vyE?rel=0&autoplay=1' allowfullscreen )
+                            
+        section( id='posts' )
+            div( class='container content-section' )
+                div( class='row list-cards justify-content-md-center' )
+                    each post, i in posts
+                        - var tam_title = post.title.length
+                        - var tam_body = post.body.length
+                        if( tam_title > 99 )
+                            - var titulo = post.title.substring( 0, 99 ) + '...'
+                        else
+                            - var titulo = post.title
+                        if( tam_body > 199 )
+                            - var cuerpo = post.body.substring( 0, 199 ) + '...'
+                        else
+                            - var cuerpo = post.body
+                        if( i < 2 )
+                            div( class='col-lg-6' data-aos= i % 2 === 0 ? 'fade-up-right' : 'fade-up-left' )
+                                div( class='card tarj' )
+                                    div( class='view ' )
+                                        if( post.first_foto == undefined )
+                                            img( src='/img/default.png' class='full-bg-img' )
+                                        else
+                                            div( class='blurred-img' style='background-image: url( "/files/'+post._id+'/thumb/'+post.first_foto+'");' )
+                                            img( src='/files/'+post._id+'/thumb/'+post.first_foto class='full-bg-img' )
+                                    a( class='btn-floating btn-action inicio' href='/posts/'+post._id )
+                                        i( class='fa fa-chevron-right' )
+                                    div( class='card-body' )
+                                        h5( class='card-title' )= post.title
+                                        hr
+                                        != cuerpo
+                                    div( class='card-data' )
+                                        i( class='fa fa-clock-o' )
+                                        small= '    ' + moment( post.fecha ).format('dddd, DD [de] MMMM [de] YYYY')
+                        if( i > 1 )
+                            div( class='col-lg-4' data-aos='zoom-out-down' )
+                                div( class='card tarj' )
+                                    div( class='view' )
+                                        if( post.first_foto == undefined )
+                                            img( src='/img/default.png' class='full-bg-img' )
+                                        else
+                                            div( class='blurred-img' style='background-image: url( "/files/'+post._id+'/thumb/'+post.first_foto+'");' )
+                                            img( src='/files/'+post._id+'/thumb/'+post.first_foto class='full-bg-img' )
+                                    a( class='btn-floating btn-action inicio' href='/posts/'+post._id )
+                                        i( class='fa fa-chevron-right' )
+                                    div( class='card-body' )
+                                        h5( class='card-title' )= titulo
+                                        hr
+                                        != cuerpo
+                                    div( class='card-data' )
+                                        i( class='fa fa-clock-o' )
+                                        small= '    ' + moment( post.fecha ).format('dddd, DD [de] MMMM [de] YYYY')
+                    //div( class='col-12 text-center'  data-aos='fade-up' data-aos-easing='ease' data-aos-delay='400' )
+                        a( href='/blog' class='btn btn-def btn-circle' ) VER TODAS LAS PUBLICACIONES
+                        
+                        
+                        
+        section( id='docs' class='section-color' )
+            div( class='container content-section' )
+                div( class='row' )
+                    div( class='col-md-12' )
+                        h3 DOCUMENTOS RECIENTEMENTE
+                div( class='row justify-content-md-center' )
+                    each doc in docs
+                        div( class='col-lg-3 col-md-6' data-aos='zoom-in-up' )
+                            div( class='card tarj docs' )
+                                div( class='view' )
+                                    img( src='/img/area.jpg' alt='' )
+                                a( class='btn-floating btn-action' href='/docs/'+doc.name target='_blank' )
+                                    i( class='fa fa-download' )
+                                div( class='card-body' )
+                                    h6( class='card-title' )= doc.title
+                    div( class='col-12 text-center'  data-aos='fade-up' data-aos-easing='ease' data-aos-delay='400' )
+                        a( href='/documentos' class='btn btn-color btn-circle' ) IR A TODOS LOS DOCUMENTOS
+                        
+                        
+                        
+        section( id='galeria' class='section-grey' )
+            div( class='container content-section' )
+                div( class='row justify-content-center align-items-center' )
+                    div( class='col-md-12' )
+                        h3 MULTIMEDIA
+                div( class='row justify-content-center' )
+                    div( class='col-lg-8 offset-lg-2' )
+                        div( id='index' class='carousel slide' data-ride='carousel' )
+                            ol( class='carousel-indicators' )
+                                each file, j in pictures
+                                    if( j < 1 )
+                                        li( data-target='#index' data-slide-to= j class='active' )
+                                    if( j > 0 && j < 9 )
+                                        li( data-target='#index' data-slide-to= j )
+                            div( class='carousel-inner' role='listbox' )
+                                each picture, i in pictures
+                                    if( picture.ruta != undefined )
+                                        if( i < 1 )
+                                            div( class='carousel-item active' )
+                                                a( href='/media/'+picture.id )
+                                                    div( class='middle' )
+                                                        img( src=picture.ruta alt=picture.title )
+                                        if( i > 0 && i < 9 )
+                                            div( class='carousel-item' )
+                                                a( href='/media/'+picture.id )
+                                                    div( class='middle' )
+                                                        img( src=picture.ruta alt=picture.title )
+                            a( class='carousel-control-prev' href='#index' role='button' data-slide='prev' )
+                                span( class='carousel-control-prev-icon' aria-hidden='true' )
+                                span( class='sr-only' ) Previous
+                            a( class='carousel-control-next' href='#index' role='button' data-slide='next' )
+                                span( class='carousel-control-next-icon' aria-hidden='true' )
+                                span( class='sr-only' ) Next
+                    div( class='col-12 text-center'  data-aos='fade-up' data-aos-easing='ease' data-aos-delay='400' )
+                        a( href='/galeria' class='btn btn-def btn-circle' ) IR A GALERIA FOTOGRAFICA

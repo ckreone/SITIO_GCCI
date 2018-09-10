@@ -1,0 +1,41 @@
+extends layout
+
+block content
+
+        - var tam_title = title.length
+        if tam_title > 99 
+            - var titulo = title.substring( 0, 99 ) + '...'
+        else
+            - var titulo = title
+        if list.length > 2 
+            - var col = 'col-lg-4'
+        else
+            - var col = 'col-lg-8'
+            
+            
+        section( id='inicio' )
+            div( class='container secundary content-section' )
+                div( class='row justify-content-center' )
+                    div( class='col-12' )
+                        nav( class='breadcrumb' )
+                            a( href='/' class='breadcrumb-item' ) Inicio
+                            case post.type
+                                when 'NOTICIA': a( href='/noticias' class='breadcrumb-item' ) NOTICIAS
+                                when 'EVENTO': a( href='/reuniones_eventos' class='breadcrumb-item' ) REUNIONES Y EVENTOS
+                                when 'NOTA': a( href='/notas_de_interes' class='breadcrumb-item' ) NOTAS DE INTERES
+                                when 'CONVOCATORIA': a( href='/convocatorias' class='breadcrumb-item' ) CONVOCATORIAS
+                                when 'FOTOS': a( href='/galeria' class='breadcrumb-item' ) GALERIA
+                            span( class='breadcrumb-item active' )= titulo                                                    
+                    div( class='col-12' )
+                        h2( class='title')= title
+                            p= moment( post.fecha ).format( 'dddd, DD [de] MMMM [de] YYYY' ) + '. Publicado por: ' + post.author
+                    div( class='col-md-10 offset-md-1' )
+                        div( class='text' )
+                            each pos in array
+                                != pos
+                        //p( class='info-text' )= post.body
+                        div( class='row justify-content-center' )
+                            each item, i in list
+                                div( class= col + ' p-2' )
+                                    a( href='/files/'+post._id+'/album/'+item data-lightbox='roadtrip' )
+                                        img( src='/files/'+post._id+'/thumb/'+item class='image' )

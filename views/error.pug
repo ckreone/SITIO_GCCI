@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+    section( id='inicio' )
+            div( class='container secundary content-section' )
+                div( class='row justify-content-md-center' )
+                    div( class='col-12 col-md-12' )
+                        nav( class='breadcrumb' )
+                            a( href='/' class='breadcrumb-item' ) Inicio
+                            span( class='breadcrumb-item active' ) ERROR
+                    div( class='col-12' )
+                        //h2 ERROR
+                        h1= message
+                        //h2= error.status
+                        //pre #{error.stack}

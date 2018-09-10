@@ -1,0 +1,190 @@
+extends layout
+
+
+block content
+
+        section( id='inicio' )
+            div( class='container secundary content-section' )
+                div( class='row justify-content-md-center' )
+                    div( class='col-12 col-md-12' )
+                        nav( class='breadcrumb' )
+                            a( href='/' class='breadcrumb-item' ) Inicio
+                            span( class='breadcrumb-item active' )= title
+                        
+                        
+                    if errors
+                        div( class='col-12' )
+                            div( class='alert alert-danger' role='alert' )
+                                for error in errors
+                                    p( class='m-0' )= error.msg
+                    
+                    
+                    div( class='col-lg-3' )
+                        aside( class='sidebar' )        
+                            ul( class='nav nav-list bs-docs-sidenav nav flex-column' )
+                                li( id='link0' )
+                                    a( href='/logout' ) CERRAR SESIÓN
+                                        i( class='fa fa-chevron-right' )
+                                li( id='link1' )
+                                    a PUBLICAR
+                                        i( class='fa fa-chevron-right' )
+                                li( id='link2' )
+                                    a USUARIOS
+                                        i( class='fa fa-chevron-right' )
+                                li( id='link3' )
+                                    a OTRAS FUNCIONES
+                                        i( class='fa fa-chevron-right' )
+                                
+                                        
+                                        
+                    div( class='col-lg-9' )
+                        
+                        
+                        div( id='sec1' class='ajust' )
+                            div( class='main-content' )
+                                h4 PUBLICAR
+                                
+                                div( id='accordion-post' role='tablist' aria-multiselectable='true' )
+                                    
+                                    div( class='card' )
+                                        div( class='card-header' role='tab' id='headingOne-post' )
+                                            h6
+                                                a( data-toggle='collapse' data-parent='#accordion-post' href='#collapseOne-post' aria-expanded='true' aria-controls='collapseOne-post' ) NOTA
+                                        div( id='collapseOne-post' class='collapse' role='tabpanel' aria-labelledby='headingOne-post' )
+                                            form( method='POST' action='/posts/new_post' )
+                                                div( class='form-group' )
+                                                    input( type='text' class='form-control mt-0' autocomplete='off' name='title' placeholder='TITULO' id='control-title' )
+                                                div( class='form-row mt-5' )
+                                                    div( class='form-group col-md-6' )
+                                                        select( class='form-control mt-0' id='control-type' name='type' placeholder='TIPO' )
+                                                            option( value='' ) TIPO DE PUBLICACIÓN
+                                                            option( value='NOTICIA' ) NOTICIA
+                                                            option( value='EVENTO' ) REUNION O EVENTO
+                                                            option( value='NOTA' ) NOTA DE INTERES
+                                                            option( value='CONVOCATORIA' ) CONVOCATORIA
+                                                    div( class='form-group col-md-6' )
+                                                        input( type='text' class='form-control mt-0' autocomplete='off' name='author' placeholder='AUTOR' id='control-author' )
+                                                div( class='form-group mt-5' )
+                                                    textarea( class='form-control' rows='10' autocomplete='off' name='body' id='mytextarea' )
+                                                div( class='form-group mt-5 justify-content-md-center' )
+                                                    button( class='btn' type='submit' ) PUBLICAR
+                                    
+                                    
+                                    div( class='card' )
+                                        div( class='card-header' role='tab' id='headingTwo-post' )
+                                            h6
+                                                a( class='collapsed' data-toggle='collapse' data-parent='#accordion-post' href='#collapseTwo-post' aria-expanded='false' aria-controls='collapseTwo-post' ) FOTOS 
+                                        div( id='collapseTwo-post' class='collapse' role='tabpanel' aria-labelledby='headingTwo-post' )
+                                            form( action='/posts/upload_fotos' enctype='multipart/form-data' method='POST' )
+                                                div( class='form-group' )
+                                                    select( class='form-control' id='know_type' name='know_type' )
+                                                        option( value='' ) ¿PUBLICACION NUEVA O PUBLICACION EXISTENTE?
+                                                        option( value='EXISTENTE' ) PUBLICACION EXISTENTE
+                                                        option( value='NUEVA' ) PUBLICACION NUEVA
+                                                div( class='form-group item-1 mt-5' )
+                                                div( class='form-group item-2 mt-5' )
+                                                    input( class='form-control-file mt-0' type='file' accept='image/*' name='fotos' id='fotos' multiple='multiple' )
+                                                div( class='form-group item-3 mt-5 justify-content-md-center' )
+                                                    button( class='btn' type='submit' ) SUBIR
+                                    
+                                    
+                                    div( class='card' )
+                                        div( class='card-header' role='tab' id='headingThree-post' )
+                                            h6
+                                                a( class='collapsed' data-toggle='collapse' data-parent='#accordion-post' href='#collapseThree-post' aria-expanded='false' aria-controls='collapseThree-post' ) DOCUMENTOS
+                                        div( id='collapseThree-post' class='collapse' role='tabpanel' aria-labelledby='headingThree-post' )
+                                            form( method='POST' action='/posts/new_doc' encType='multipart/form-data' )
+                                                div( class='form-group' )
+                                                    input( type='text' class='form-control mt-0' autocomplete='off' name='title' placeholder='TITULO' id='title' )
+                                                div( class='form-group mt-5' )
+                                                    textarea( class='form-control mt-0' rows='5' autocomplete='off' name='description' id='description' placeholder='DESCRIPCION DEL DOCUMENTO' )
+                                                div( class='form-group item-2 mt-5' )
+                                                    input( type='file' class='form-control-file mt-0' accept='application/pdf' name='archivo' id='archivo' )
+                                                div( class='form-group item-3 mt-5 justify-content-md-center' )
+                                                    button( class='btn' type='submit' ) SUBIR
+                                                
+                                                    
+                                            //<input class="form-control-file mt-0" type="file" accept="image/*" name="archivo" id="archivo" multiple="">' );
+                                        
+                                            //form( method='POST' action='/posts/adddoc' encType='multipart/form-data' )
+                                                div( class='row' )
+                                                    div( class='col-12' )
+                                                        div( class='input-group label-floating is-empty' )
+                                                            label( class='control-label' ) TITULO
+                                                            input( type='text' class='form-control' autocomplete='off' name='title' id='title' )
+                                                            span( class='material-input' )
+                                                div( class='row' )
+                                                    div( class='col-12' )
+                                                        div( class='input-group label-floating is-empty' )
+                                                            label( class='control-label' ) DESCRIPCIÓN DEL DOCUMENTO
+                                                            textarea( class='form-control' rows='5' autocomplete='off' name='description' id='description' )
+                                                            span( class='material-input' )                                               
+                                                div( class='row' )
+                                                    div( class='col-12' )
+                                                        div( class='input-group' )
+                                                            input( type='file' accept='application/pdf' name='archivo' id='archivo' )
+                                                div( class='row' )
+                                                    div( class='col-lg-6' )
+                                                        div( class='input-group' )
+                                                            label Publico
+                                                            input( type='radio' name='type' id='type' value='public' )
+                                                    div( class='col-lg-6' )
+                                                        div( class='input-group' )
+                                                            label Privado
+                                                            input( type='radio' name='type' id='type' value='private' )
+
+
+                                                div( class='row justify-content-md-center' )
+                                                    div( class='col-md-6 offset-md-3' )
+                                                        button( class='btn' type='submit' ) GUARDAR
+                                                        
+                                                        
+                                                        
+                                                        
+                        div( id='sec2' class='ajust' )
+                            div( class='main-content' )
+                                h4 USUARIOS
+            
+                                div( id='accordion-user' role='tablist' aria-multiselectable='true' )
+                                    div( class='card' )
+                                        div( class='card-header' role='tab' id='headingOne-user' )
+                                            h6
+                                                a( data-toggle='collapse' data-parent='#accordion-user' href='#collapseOne-user' aria-expanded='true' aria-controls='collapseOne-user' ) AÑADIR USUARIO
+                                        div( id='collapseOne-user' class='collapse show' role='tabpanel' aria-labelledby='headingOne-user' )
+                                            form( method='POST' action='/posts/new_user' )
+                                                div( class='col-12' )
+                                                    div( class='input-group label-floating is-empty' )
+                                                        label( class='control-label' ) NOMBRE DE USUARIO
+                                                        input( type='text' class='form-control' autocomplete='off' name='usuario' )
+                                                        span( class='material-input' )
+                                                div( class='col-12' )
+                                                    div( class='input-group label-floating is-empty' )
+                                                        label( class='control-label' ) CONTRASEÑA
+                                                        input( type='password' class='form-control' autocomplete='off' name='contrasenia_1' )
+                                                        span( class='material-input' )
+                                                div( class='col-12' )
+                                                    div( class='input-group label-floating is-empty' )
+                                                        label( class='control-label' ) CONFIRMAR CONTRASEÑA
+                                                        input( type='password' class='form-control' autocomplete='off' name='contrasenia_2' )
+                                                        span( class='material-input' )
+                                                div( class='col-12' )
+                                                    button( class='btn' type='submit' ) GUARDAR
+                                                                        
+                                    div( class='card' )
+                                        div( class='card-header conf-users' role='tab' id='headingTwo-user' )
+                                            h6
+                                                a( class='collapsed' data-toggle='collapse' data-parent='#accordion-user' href='#collapseTwo-user' aria-expanded='false' aria-controls='collapseTwo-user' ) EDITAR USUARIO
+                                        div( id='collapseTwo-user' class='collapse' role='tabpanel' aria-labelledby='headingTwo-user' )
+                                            table( class='table table-responsive' )
+                                                thead( class='text-primary' )
+                                                    tr
+                                                        th USUARIO
+                                                        //th CONTRASEÑA
+                                                        th TIPO
+                                                tbody( class='tabla-cuerpo' )
+                                                
+                                                
+                                                
+                                                
+                        div( id='sec3' class='ajust' )
+                            div( class='main-content' )

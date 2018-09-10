@@ -1,0 +1,30 @@
+extends layout
+
+block content
+
+        - var tam_title = title.length
+        
+        if( tam_title > 99 )
+            - var titulo = title.substring( 0, 99 ) + '...'
+        else
+            - var titulo = title
+
+        section( id='inicio' )
+            div( class='container secundary content-section' )
+                div( class='row justify-content-center' )
+                    div( class='col-12 col-md-12' )
+                        nav( class='breadcrumb' )
+                            a( href='/' class='breadcrumb-item' ) Inicio
+                            a( href='/galeria' class='breadcrumb-item' ) Galeria
+                            span( class='breadcrumb-item active' )= titulo
+                            
+                    div( class='col-12' )
+                        h2( class='title')= title
+                            p= moment( post.fecha ).format( 'dddd, DD [de] MMMM [de] YYYY' )
+                        a( href='/posts/'+post._id class='btn btn-def btn-circle' ) VER MÁS SOBRE ESTA PUBLICACIÓN
+                        
+                div( class='row justify-content-center' )
+                    each item, i in list
+                        div( class='col-lg-6 col-md-12 p-3' )
+                            a( href='/files/'+post._id+'/album/'+item data-lightbox='roadtrip' )
+                                img( src='/files/'+post._id+'/thumb/'+item class='image' )

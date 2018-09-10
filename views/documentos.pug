@@ -1,0 +1,89 @@
+extends layout
+
+
+block content
+
+        section( id='inicio' )
+            div( class='container secundary content-section' )
+                div( class='row' )
+                    div( class='col-12 col-md-12' )
+                        nav( class='breadcrumb' )
+                            a( href='/' class='breadcrumb-item' ) Inicio
+                            span( class='breadcrumb-item active' )= title
+                    //div( class='col-12' )
+                        h2= title
+                        
+                        
+                div( class='row justify-content-end filters' )
+                    //if user
+                        div( class='col-lg-2 col-sm-6' )
+                                div( class='input-group  label-floating' )
+                                    label( class='control-label' ) CATEGORIA
+                                    select( class='category' name='category' class='form-control' )
+                                        option( value='public' selected= category == 'public' ) públicos
+                                        option( value='private' selected= category == 'private' ) privados
+                                    span( class='material-input' )
+                    
+                    div( class='col-lg-2 col-sm-6' )
+                            div( class='input-group  label-floating' )
+                                label( class='control-label' ) DOCS. POR PÁG.
+                                select( class='number' name='number' class='form-control' )
+                                    option( value='9', selected=true ) 9
+                                    option( value='36', selected=pageSize == 36 ) 36
+                                    option( value='90', selected=pageSize == 90 ) 90
+                                span( class='material-input' )
+                                
+                                
+                div( class='row justify-content-md-center' )
+                    each item in items
+                        - var tam_body = item.description.length
+                        if( tam_body > 199 )
+                            - var cuerpo = item.description.substring( 0, 199 ) + '...'
+                        else
+                            - var cuerpo = item.description
+                    
+                        
+                        div( class='col-lg-4' data-aos='zoom-in-up' )
+                            div( class='card tarj docs' )
+                                div( class='view' )
+                                    img( src='/img/area.jpg' alt='' )
+                                a( class='btn-floating btn-action' href='/docs/'+item.name target='_blank' )
+                                    i( class='fa fa-download' )
+                                div( class='card-body' )
+                                    h6( class='card-title' )= item.title
+                                    hr
+                                    p( class='card-text' )= cuerpo
+                                    
+                                    
+                div( class='row justify-content-md-center' )
+                    div( class='col-md-12' )
+                        if pageCount > 1
+                            ul( class='pagination pagination-circle' )
+                                if currentPage > 1
+                                    li(class ='page-item')
+                                        a( class='page-link' href='/documentos?page=1&lim='+pageSize aria-label='inicio' )
+                                            i( class='material-icons' ) first_page
+                                - var x = 1
+                                if currentPage > 5
+                                    - x = x + ( currentPage - 4 )
+                                if (x !== 1)
+                                    li(class ='page-item disabled' )
+                                        a( class='page-link' href='#' ) ...
+                                - for ( x; x <= pageCount; x++ )
+                                    if( currentPage == x)
+                                        li(class ='page-item active' )
+                                            a( class='page-link' )
+                                                = currentPage
+                                    else
+                                        li(class ='page-item')
+                                            a( class='page-link' href='/documentos?page='+x+'&lim='+pageSize )
+                                                = x
+                                    if x == ( currentPage + 4 )
+                                        li(class ='page-item disabled' )
+                                            a( class='page-link' href='#' ) ...
+                                                - break
+                                                
+                                if currentPage != pageCount
+                                    li(class ='page-item')
+                                        a( class='page-link' href='/documentos?page='+Math.floor(pageCount)+'&lim='+pageSize aria-label='Fin' )
+                                            i( class='material-icons' ) last_page

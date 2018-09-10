@@ -1,0 +1,85 @@
+ul( class='navbar-nav ml-auto' )
+
+    li( class = title === 'GRUPO CAMBIO CLIMATICO IMTA' ? 'nav-item active' : 'nav-item' )
+        a( href= title === 'GRUPO CAMBIO CLIMATICO IMTA' ? '#inicio' : '/' class='nav-link js-scroll-trigger' ) INICIO
+        
+        
+        
+    li( class = title === '¿QUIENES SOMOS?' || title == '¿QUE HACEMOS?' || title == 'JEFES DE PROYECTO' ? 'nav-item dropdown active' : 'nav-item dropdown' )
+        a( class='nav-link dropdown-toggle acerca' id='navbarDropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' ) ACERCA DE
+        div( class='dropdown-menu acerca' aria-labelledby='navbarDropdownMenuLink' )
+            div( class='row' )
+                div( class='col-lg-12' )
+                    p
+                        a( href= title === '¿QUIENES SOMOS?' ? '#inicio' : '/quienes-somos' class= title === '¿QUIENES SOMOS?' ? 'dropdown-item active' : 'dropdown-item' ) ¿QUIENES SOMOS?
+                    p
+                        a( href= title === '¿QUE HACEMOS?' ? '#inicio' : '/que-hacemos' class= title === '¿QUE HACEMOS?' ? 'dropdown-item active' : 'dropdown-item' ) ¿QUE HACEMOS?
+                    p
+                        a( href= title === 'JEFES DE PROYECTO' ? '#inicio' : '/jefes' class= title === 'JEFES DE PROYECTO' ? 'dropdown-item active' : 'dropdown-item' ) JEFES DE PROYECTO
+                        
+                        
+                        
+    li( class = title === 'NOTICIAS' || title == 'NOTAS DE INTERES' || title == 'CONVOCATORIAS' || title == 'REUNIONES Y EVENTOS' ? 'nav-item dropdown active' : 'nav-item dropdown' )
+        a( class='nav-link dropdown-toggle acerca' id='navbarDropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' ) COMUNICACIÓN
+        div( class='dropdown-menu acerca' aria-labelledby='navbarDropdownMenu' )
+            div( class='row' )
+                div( class='col-lg-12' )
+                    p
+                        a( href= title === 'NOTICIAS' ? '#inicio' : '/noticias' class= title === 'NOTICIAS' ? 'dropdown-item active' : 'dropdown-item' ) NOTICIAS
+                    p
+                        a( href= title === 'REUNIONES Y EVENTOS' ? '#inicio' : '/reuniones_eventos' class= title === 'REUNIONES Y EVENTOS' ? 'dropdown-item active' : 'dropdown-item' ) EVENTOS Y REUNIONES
+                    p
+                        a( href= title === 'NOTAS DE INTERES' ? '#inicio' : '/notas_de_interes' class= title === 'NOTAS DE INTERES' ? 'dropdown-item active' : 'dropdown-item' ) NOTAS DE INTERES
+                    p
+                        a( href= title === 'CONVOCATORIAS' ? '#inicio' : '/convocatorias' class= title === 'CONVOCATORIAS' ? 'dropdown-item active' : 'dropdown-item' ) CONVOCATORIAS
+                            
+                            
+                            
+    li( class = title === 'GALERIA' ? 'nav-item active' : 'nav-item' )
+        a( href= title === 'GALERIA' ? '#inicio' : '/galeria' class='nav-link js-scroll-trigger' ) GALERIA
+            
+            
+            
+    li( class = title === 'DOCUMENTOS' ? 'nav-item active' : 'nav-item' )
+        //if user
+            a( href= title === 'DOCUMENTOS' ? '#inicio' : '/private/documentos' class='nav-link js-scroll-trigger' ) DOCUMENTOS
+        //else
+        a( href= title === 'DOCUMENTOS' ? '#inicio' : '/documentos' class='nav-link js-scroll-trigger' ) DOCUMENTOS
+            
+            
+            
+    li( class='nav-item' )
+        a( data-toggle='modal' data-target='#modal-contact' role='tab' class='nav-link js-scroll-trigger' ) CONTACTO
+        
+        
+    if user
+            
+        li( class = title === 'ADMINISTRADOR' ? 'nav-item active' : 'nav-item' )
+            a( href= title === 'ADMINISTRADOR' ? '#inicio' : '/admin' class='nav-link js-scroll-trigger' )= user.nickname
+        //li( class='nav-item dropdown' ) 
+            a( class='nav-link dropdown-toggle' id='navbarDropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' )= user.nickname
+            div( class='dropdown-menu seccion' aria-labelledby='navbarDropdownMenuLink' )
+                div( class='row' )
+                    div( class='col-lg-12' )
+                        p
+                            a( href='/admin' class='dropdown-item' ) ADMINISTRAR
+                        p
+                            a( href='/logout' class='dropdown-item' ) CERRAR SESIÓN
+    else
+        li( class='nav-item dropdown' )
+            a( class='nav-link dropdown-toggle' id='navbarDropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' )
+                i( class='material-icons' ) settings
+            div( class='dropdown-menu sesion' aria-labelledby='navbarDropdownMenuLink' )
+                form( method='POST', action='/login' )
+                    div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) USUARIO
+                                input( type='text' class='form-control' autocomplete='off' name='username' id='username' )
+                                span( class='material-input' )
+                    div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            div( class='input-group label-floating is-empty' )
+                                label( class='control-label' ) CONTRASEÑA
+                                input( type='password' class='form-control' autocomplete='off' name='password' id='password' )
+                                span( class='material-input' )
+                    div( class='col-lg-12 col-md-12 col-sm-12 col-xs-12' )
+                            button( class='btn' type='submit' ) INICIAR SESIÓN
