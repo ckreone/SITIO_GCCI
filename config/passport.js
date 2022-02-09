@@ -3,15 +3,21 @@ const User = require( '../models/user' );
 const config = require( '../config/database' );
 const bcrypt = require( 'bcryptjs' );
 
+
 module.exports = function( passport ) {
-    
+
     passport.use( new LocalStrategy( function( nickname, password, done ) {
+
         let query = { nickname: nickname };
+
         User.findOne( query, function( err, user ) {
+
             if( err ) throw err;
-            if( !user ) {
+
+            if( ! user ) {
                 return done( null, false, { message: 'Usuario no encontrado.' } );
             }
+
             /*if( password == user.password ) {
                 if( err ) throw err;
                 return done( null, user );
@@ -19,8 +25,11 @@ module.exports = function( passport ) {
             else {
                 return done( null, false, { message: 'Contraseña incorrecta.' } );
             }*/
+
             bcrypt.compare( password, user.password, function( err, isMatch ) {
+
                 if( err ) throw err;
+
                 if( isMatch ) {
                     return done( null, user );
                 }
@@ -40,6 +49,5 @@ module.exports = function( passport ) {
             done( err, user );
         });
     });
-
 
 }

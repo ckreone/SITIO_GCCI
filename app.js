@@ -26,23 +26,22 @@ let media = require( './routes/media' );
 mongoose.Promise = global.Promise;
 mongoose.connect( config.database, {
     useMongoClient: true
- });
+});
+
 let db = mongoose.connection;
+
 db.once( 'open', function() {
   console.log( 'conectado a MongoDB' );
 });
+
 db.on( 'error', function( err ) {
   console.log( err );
 });
 
-
 const app = express();
 
-
-app.use(busboy());
-
+app.use( busboy() );
 app.use( fileUpload() );
-
 
 app.set( 'views', path.join( __dirname, 'views' ) );
 app.set( 'view engine', 'pug' );
